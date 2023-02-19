@@ -38,5 +38,24 @@ Codgo Main se implementa el metodo Onclic "ejecutar"
 <p align="center"><img src ="https://user-images.githubusercontent.com/74762981/219979480-32b98755-a64d-4e85-bf5c-e0ad89a9059d.png" width="600"/></p>
 
 
+- Ejercicio 40
+
+Implementar el juego del Buscaminas. Crear una grilla de 8*8 celdas.
+
+Creamos un proyecto llamado: BuscaMinas
+Borramos el TextView que agrega automáticamente el Android Studio y disponemos un Button y un LinearLayout:
+Al botón inicializamos la propiedad onClick con el valor "reiniciar" y al LinearLayout le asignamos el ID como "layout1".
+
+
+<p align="center"><img src ="https://user-images.githubusercontent.com/74762981/219981929-4d545526-4818-422f-9b44-f526a7ed9e5d.png" width="600"/></p>
+
+- Creamos una clase MainActivity y Casilla 
+
+<p align="center"><img src ="https://user-images.githubusercontent.com/74762981/219982064-8451217e-7cf5-45da-8742-5cfc59a67f4c.png" width="600"/></p>
+
+- Resultado
+
+<p align="center"><img src ="https://user-images.githubusercontent.com/74762981/219982164-d9c2daea-7c2f-465f-bb31-05a1ce5d94f9.png" width="400"/></p>
+
 
 
