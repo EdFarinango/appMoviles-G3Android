@@ -3,7 +3,7 @@
 
 - Kevin Pinanjota
 - Eduardo Farinango
-- 
+- Mateo Cueva
 
 
 ### Implementar los ejercicios del 3 al 46 de acuerdo a las instrucciones brindadas. 
