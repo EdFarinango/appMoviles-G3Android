@@ -11,6 +11,96 @@
 GRUPO 3
 Implementar los ejercicos 5,10,15,20,25,30,35,40,45
 
+- Ejercicio 5
+
+Realizar la carga de dos números en controles de tipo EditText ("Number"). Mostrar en las propiedades "hint" de cada componente un mensaje que solicite la carga de los valores. Disponer dos controles de tipo CheckBox para seleccionar si queremos sumar y/o restar dichos valores. Finalmente mediante un control de tipo Button efectuamos la operación respectiva. Mostramos el o los resultados en un TextView.
+
+### Desarrollo:
+
+- En el archivo activity_main.xml realizamos la parte visual de la aplicacion, ademas de asginar las propiedas respectivas a cada uno de los elementos de la interfaz grafica, entre ella las propiedas 'text' para mostrar un texto e 'id' para referenciar al boton CheckBox.
+
+<p align="center"><img src ="https://user-images.githubusercontent.com/74993888/220184979-805b0beb-d713-4099-a94a-8bd2039667c6.png" width="400"/></p>
+
+- Se debe realizar el mismo paso antes descrito para los demas elementos, cada elemento debe quedar como se muestra en la imágen.
+
+<p align="center"><img src ="https://user-images.githubusercontent.com/74993888/220185499-f117f74d-ac59-48c9-b251-c28d00195d3a.png" width="400"/></p>
+
+- En el archivo activity_main.xml realizamos la parte visual de la aplicació, ademas de asginar las propiedas respectivas a cada uno de los elementos de la interfaz grafica, entre ella las propiedas 'text' para mostrar un texto e 'id' para referenciar al boton CheckBox.
+
+<p align="center"><img src ="https://user-images.githubusercontent.com/74993888/220184979-805b0beb-d713-4099-a94a-8bd2039667c6.png" width="400"/></p>
+
+- Se debe realizar el mismo paso antes descrito para los demas elementos, cada elemento debe quedar como se muestra en la imágen.
+
+<p align="center"><img src ="https://user-images.githubusercontent.com/74993888/220185499-f117f74d-ac59-48c9-b251-c28d00195d3a.png" width="400"/></p>
+
+- No olvidemos inicializar la propiedad onClick del objeto button con el valor "operar" (es el nombre del método a ejecutarse cuando se presione el botón y lo implementa la clase que hacemos)
+
+- El siguiente paso es dirigirnos hacia el archivo 'MainActivity.java', y desarrollar la funcionalidad de la aplicacion, para esta apliación son las operaciones.
+
+```
+package com.example.a35dibujartexto;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ConstraintLayout layout1 =  findViewById(R.id.layout1);
+        Lienzo fondo = new Lienzo(this);
+        layout1.addView(fondo);
+        getSupportActionBar().hide();
+    }
+
+
+    class Lienzo extends View {
+
+        public Lienzo(Context context) {
+            super(context);
+        }
+
+        protected void onDraw(Canvas canvas) {
+            canvas.drawRGB(0, 0, 255);
+            Paint pincel1 = new Paint();
+            pincel1.setARGB(255, 255, 0, 0);
+            pincel1.setTextSize(30);
+            pincel1.setTypeface(Typeface.SERIF);
+            canvas.drawText("Hola Mundo (SERIF)", 0, 70, pincel1);
+            pincel1.setTypeface(Typeface.SANS_SERIF);
+            canvas.drawText("Hola Mundo (SANS SERIF)", 0, 100, pincel1);
+            pincel1.setTypeface(Typeface.MONOSPACE);
+            canvas.drawText("Hola Mundo (MONOSPACE)", 0, 140, pincel1);
+            Typeface tf = Typeface.create(Typeface.SERIF, Typeface.ITALIC);
+            pincel1.setTypeface(tf);
+            canvas.drawText("Hola Mundo (SERIF ITALIC)", 0, 180, pincel1);
+            tf = Typeface.create(Typeface.SERIF, Typeface.ITALIC | Typeface.BOLD);
+            pincel1.setTypeface(tf);
+            canvas.drawText("Hola Mundo (SERIF ITALIC BOLD)", 0, 220, pincel1);
+        }
+    }
+}
+```
+
+- El resultado y funcionalidad es el siguiente, se ejecuta la aplicación desde un emulador o también se lo puede realizar desde un celular descargando su APK. Una vez iniciada la aplicación se observa que realiza correctamente las operaciones y que los botones CheckBox estan teniendo su respectiva interaccion.
+
+<p align="center"><img src ="https://user-images.githubusercontent.com/74993888/220187036-5f87af7a-93cc-4025-ae06-fef6aaeb9561.png" width="400"/></p>
+
 - Ejercicio 25
 
 Disponer un botón con la etiqueta: "gato", luego cuando se presione reproducir el archivo de audio respectivo. El archivo de sonido almacenarlo en la tarjeta SD.
