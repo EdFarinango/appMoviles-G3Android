@@ -142,6 +142,7 @@ Por último en el método onCreate del Activity obtenemos la referencia del Cons
 y agregamos el objeto fondo al ConstraintLayout llamando al método addView
 
 ![image](https://user-images.githubusercontent.com/68386574/220667000-26c9e3cf-9637-4e25-9337-0f22692b8f6c.png)
+
 Ejecución del programa 
 ![image](https://user-images.githubusercontent.com/68386574/220718508-cf0a7d67-dffc-404f-b53c-bea7002a24c7.png)
 
