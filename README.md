@@ -4,6 +4,7 @@
 - Kevin Pinanjota
 - Eduardo Farinango
 - Mateo Cueva
+- Kevin Pulupa
 
 
 ### Implementar los ejercicios del 3 al 46 de acuerdo a las instrucciones brindadas. 
