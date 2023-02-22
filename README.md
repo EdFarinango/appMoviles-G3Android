@@ -127,6 +127,13 @@ Codgo Main se implementa el metodo Onclic "ejecutar"
 
 <p align="center"><img src ="https://user-images.githubusercontent.com/74762981/219979480-32b98755-a64d-4e85-bf5c-e0ad89a9059d.png" width="600"/></p>
 
+- Ejercicio 30
+Dibujar: Graficar un píxel
+Creacion de un proyecto: Proyecto033
+luego borramos el TextView para proceder a definir un id para el  ConstraintLayout (le asignamos como id el valor layout1)
+<p <align="center"><(img src = "https://user-images.githubusercontent.com/68386574/220635487-1fb853c7-7265-405f-88fe-ada82bff2e76.png" width ="600"/></p>
+
+
 
 - Ejercicio 40
 
