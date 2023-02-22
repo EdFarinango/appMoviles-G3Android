@@ -129,6 +129,7 @@ Codgo Main se implementa el metodo Onclic "ejecutar"
 <p align="center"><img src ="https://user-images.githubusercontent.com/74762981/219979480-32b98755-a64d-4e85-bf5c-e0ad89a9059d.png" width="600"/></p>
 
 - Ejercicio 30
+
 Dibujar: Graficar un píxel.
 Creación de un proyecto: Proyecto033.
 luego borramos el TextView para proceder a definir un id para el ConstraintLayout (le asignamos como id el valor layout1).
@@ -147,6 +148,88 @@ Ejecución del programa
 
 ![image](https://user-images.githubusercontent.com/68386574/220718508-cf0a7d67-dffc-404f-b53c-bea7002a24c7.png)
 
+- Ejercicio 35
+
+Otra recurso que nos permite la clase Canvas es el de graficar texto.
+
+### Desarrollo:
+
+Borramos el TextView que agrega automáticamente el Android Studio y definimos el id del ConstraintLayout con el valor: layout1:
+
+<p align="center"><img src ="https://scontent.fuio10-1.fna.fbcdn.net/v/t1.15752-9/332562248_586904653345994_8269887993962226440_n.png?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeFATl2uvPDiNrDzWRzwrcRCFzfokJc-y_wXN-iQlz7L_M0ACtHVGbISiq36zDtFFtkO9IgH8Ne2j5i_rDUnHOOn&_nc_ohc=uaT_eYiRcDoAX_WICC9&_nc_ht=scontent.fuio10-1.fna&oh=03_AdTEy034swizeneXrddplJlPnm0tt5dL5XATCRZOyke45g&oe=641E1160" width="400"/></p>
+
+Ahora codificamos la clase donde se encuentra toda la lógica:
+
+```
+package com.example.a35dibujartexto;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ConstraintLayout layout1 =  findViewById(R.id.layout1);
+        Lienzo fondo = new Lienzo(this);
+        layout1.addView(fondo);
+        getSupportActionBar().hide();
+    }
+
+
+    class Lienzo extends View {
+
+        public Lienzo(Context context) {
+            super(context);
+        }
+
+        protected void onDraw(Canvas canvas) {
+            canvas.drawRGB(0, 0, 255);
+            Paint pincel1 = new Paint();
+            pincel1.setARGB(255, 255, 0, 0);
+            pincel1.setTextSize(30);
+            pincel1.setTypeface(Typeface.SERIF);
+            canvas.drawText("Hola Mundo (SERIF)", 0, 70, pincel1);
+            pincel1.setTypeface(Typeface.SANS_SERIF);
+            canvas.drawText("Hola Mundo (SANS SERIF)", 0, 100, pincel1);
+            pincel1.setTypeface(Typeface.MONOSPACE);
+            canvas.drawText("Hola Mundo (MONOSPACE)", 0, 140, pincel1);
+            Typeface tf = Typeface.create(Typeface.SERIF, Typeface.ITALIC);
+            pincel1.setTypeface(tf);
+            canvas.drawText("Hola Mundo (SERIF ITALIC)", 0, 180, pincel1);
+            tf = Typeface.create(Typeface.SERIF, Typeface.ITALIC | Typeface.BOLD);
+            pincel1.setTypeface(tf);
+            canvas.drawText("Hola Mundo (SERIF ITALIC BOLD)", 0, 220, pincel1);
+        }
+    }
+}
+```
+
+Para graficar texto disponemos del método drawText que nos permite imprimir un String en una determinada columna, fila con un determinado pincel que podemos definir su color:
+
+```
+ Paint pincel1=new Paint();
+ pincel1.setARGB(255,255,0,0);
+```
+
+El funcionamieneto del programa es:
+
+![image](https://user-images.githubusercontent.com/74993888/220786112-e28cb403-e554-44bf-a18c-a803b46dfadf.png)
 
 - Ejercicio 40
 
