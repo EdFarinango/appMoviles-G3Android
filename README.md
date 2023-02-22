@@ -128,13 +128,19 @@ Codgo Main se implementa el metodo Onclic "ejecutar"
 <p align="center"><img src ="https://user-images.githubusercontent.com/74762981/219979480-32b98755-a64d-4e85-bf5c-e0ad89a9059d.png" width="600"/></p>
 
 - Ejercicio 30
-Dibujar: Graficar un píxel
-Creacion de un proyecto: Proyecto033
-luego borramos el TextView para proceder a definir un id para el  ConstraintLayout (le asignamos como id el valor layout1)
+Dibujar: Graficar un píxel.
+Creación de un proyecto: Proyecto033.
+luego borramos el TextView para proceder a definir un id para el ConstraintLayout (le asignamos como id el valor layout1).
 ![image](https://user-images.githubusercontent.com/68386574/220636422-89299c36-3e9c-48e3-98cb-eb756d38cba7.png)
+Ahora procedemos a dirigirnos al MainActivity.java debemos crear el metodo onDraw en este metodo obtenemos el ancho y el alto mediante los metodos getWidth() y getHeight() que nos provee la clase Canvas.
+Seguidamente creamos un objeto de la clase Paint. Llamamos al método setARGB para definir el color del pincel
 
+![image](https://user-images.githubusercontent.com/68386574/220665561-49ac995c-c7f8-4300-bed0-4419cda88de0.png)
 
+Por último en el método onCreate del Activity obtenemos la referencia del ConstraintLayout que tiene el Activity. Creamos un objeto de la clase Lienzo.
+y agregamos el objeto fondo al ConstraintLayout llamando al método addView
 
+![image](https://user-images.githubusercontent.com/68386574/220667000-26c9e3cf-9637-4e25-9337-0f22692b8f6c.png)
 
 - Ejercicio 40
 
