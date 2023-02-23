@@ -507,7 +507,8 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
--Resultado
+--Resultado
+
 ![image](https://user-images.githubusercontent.com/75056800/220795634-ca8fc7db-9846-4981-89d7-bfa1fb031e46.png)
 
 
