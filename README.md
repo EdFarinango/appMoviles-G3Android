@@ -102,6 +102,108 @@ public class MainActivity extends AppCompatActivity {
 
 <p align="center"><img src ="https://user-images.githubusercontent.com/74993888/220187036-5f87af7a-93cc-4025-ae06-fef6aaeb9561.png" width="400"/></p>
 
+# Ejercicio 10
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+Para crear una aplicación de Android que permita ingresar el nombre del usuario y su clave en dos controles de tipo EditText y verificar si se ingresó texto cuando se presione un botón, se pueden seguir los siguientes pasos:
+
+
+- Crear un nuevo proyecto de Android Studio con una actividad vacía.
+- Agregar dos controles de tipo EditText en el diseño de la actividad, uno para el nombre de usuario y otro para la password.
+- Agregar un botón en el diseño de la actividad para verificar los campos de texto. Por ejemplo:
+
+```sh
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:hint="Nombre de usuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="123dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="132dp"
+        android:hint="Clave"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/verifyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="180dp"
+        android:text="Verificar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+```
+![Layout](https://user-images.githubusercontent.com/75056800/220793762-b1f2e8a3-008d-4d8c-a6af-55190d8c36f7.png)
+
+## MainActivity
+
+Agregamos un Listener al botón para detectar cuándo se presiona. En el Listener, se pueden obtener los valores de los campos de texto y verificar si se ingresó texto
+```sh
+package com.example.ejercicio10
+
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
+
+
+class MainActivity : AppCompatActivity() {
+    private var usernameEditText: EditText? = null
+    private var passwordEditText: EditText? = null
+    private var verifyButton: Button? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        usernameEditText = findViewById(R.id.usernameEditText)
+        passwordEditText = findViewById(R.id.passwordEditText)
+        verifyButton = findViewById(R.id.verifyButton)
+        verifyButton?.setOnClickListener(View.OnClickListener {
+            val username = usernameEditText?.text.toString()
+            val password = passwordEditText?.text.toString()
+            if (username == "admin" && password == "admin") {
+                Toast.makeText(this@MainActivity, "Login Successful", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@MainActivity, "No se puede ingresar sin la clave", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+}
+```
+
+
+
+![Notify](https://user-images.githubusercontent.com/75056800/220793154-01d18ea3-08ec-4f56-965c-23f64fda3409.png)
+
+
 - Ejercicio 25
 
 Disponer un botón con la etiqueta: "gato", luego cuando se presione reproducir el archivo de audio respectivo. El archivo de sonido almacenarlo en la tarjeta SD.
@@ -229,7 +331,7 @@ Para graficar texto disponemos del método drawText que nos permite imprimir un 
 
 El funcionamieneto del programa es:
 
-![image](https://user-images.githubusercontent.com/74993888/220786112-e28cb403-e554-44bf-a18c-a803b46dfadf.png)
+![notiifcación](https://user-images.githubusercontent.com/74993888/220786112-e28cb403-e554-44bf-a18c-a803b46dfadf.png)
 
 - Ejercicio 40
 
