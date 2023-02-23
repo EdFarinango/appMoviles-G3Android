@@ -352,5 +352,167 @@ Al botón inicializamos la propiedad onClick con el valor "reiniciar" y al Linea
 
 <p align="center"><img src ="https://user-images.githubusercontent.com/74762981/219982164-d9c2daea-7c2f-465f-bb31-05a1ce5d94f9.png" width="400"/></p>
 
+# Ejercicio 45
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+
+Para crear una aplicación con un ActionBar que muestra dos botones de acción y tres opciones en el menú desplegable del ActionBar se necesita seguir los sigientes pasos.
+
+- Crea un nuevo proyecto en Android Studio y selecciona la opción "Empty Activity".
+- Abre el archivo res/values/styles.xml y modifica el estilo de la actividad para que tenga un ActionBar en la parte superior de la pantalla. Asegúrate de que el estilo herede de Theme.MaterialComponents.Light.NoActionBar.
+
+```sh
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Agrega esta línea para mostrar el ActionBar -->
+        <item name="windowActionBar">true</item>
+    </style>
+
+
+</resources>
+```
+
+- Para continuar se debe crear una carpeta dentro del dierectorio res/menu/menu_main.xml con el código.
+
+```sh
+una car<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <item
+            android:id="@+id/media_route_menu_item"
+            android:title="Cast"
+            app:actionProviderClass="androidx.mediarouter.app.MediaRouteActionProvider"
+            tools:icon="@drawable/mr_button_light" />
+        <item
+            android:id="@+id/menu_option1"
+            android:title="Opción 1" />
+        <item
+            android:id="@+id/menu_option2"
+            android:title="Opción 2" />
+        <item
+            android:id="@+id/menu_option3"
+            android:title="Opción 3" />
+
+
+
+        <item
+            android:id="@+id/telefono"
+            app:showAsAction="ifRoom"
+            android:title="telefono"
+            android:icon="@drawable/ic_call" />
+
+        <item
+            android:id="@+id/camara"
+            app:showAsAction="ifRoom"
+            android:title="camara"
+            android:icon="@drawable/ic_camera" />
+
+
+
+
+```
+
+![image](https://user-images.githubusercontent.com/75056800/220795325-2c311142-5a8e-41fc-a65b-b64dd234cfad.png)
+
+- Abrimos el archivo MainActivity.java y agrega el siguiente código para agregar los botones de acción y mostrar el menú desplegable:
+```sh
+
+package com.example.text
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+
+
+
+
+class MainActivity : AppCompatActivity() {
+
+    private var usernameEditText: EditText? = null
+    private var passwordEditText: EditText? = null
+    private var verifyButton: Button? = null
+
+
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        setContentView(R.layout.activity_main)
+        usernameEditText = findViewById(R.id.usernameEditText)
+        passwordEditText = findViewById(R.id.passwordEditText)
+        verifyButton = findViewById(R.id.verifyButton)
+        verifyButton?.setOnClickListener(View.OnClickListener {
+            val username = usernameEditText?.text.toString()
+            val password = passwordEditText?.text.toString()
+            if (username == "admin" && password == "admin") {
+                Toast.makeText(this@MainActivity, "Login Successful", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@MainActivity, "No se puede ingresar sin la clave", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+
+        menuInflater.inflate(R.menu.menu_main, menu)
+
+
+
+
+        return true
+    }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_option1 -> {
+                Toast.makeText(this, "Opción 1", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.menu_option2 -> {
+                Toast.makeText(this, "Opción 2", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.menu_option3 -> {
+                Toast.makeText(this, "Opción 3", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.telefono -> {
+                Toast.makeText(this, "Presiono el telefono", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.camara -> {
+                Toast.makeText(this, "Presiono la cámara", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+}
+```
+-Resultado
+![image](https://user-images.githubusercontent.com/75056800/220795634-ca8fc7db-9846-4981-89d7-bfa1fb031e46.png)
+
+
+
+
+
 
 
