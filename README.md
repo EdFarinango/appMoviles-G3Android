@@ -203,6 +203,88 @@ class MainActivity : AppCompatActivity() {
 
 ![Notify](https://user-images.githubusercontent.com/75056800/220793154-01d18ea3-08ec-4f56-965c-23f64fda3409.png)
 
+# Ejercicio 15
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+El control de tipo FrameLayout dispone dentro del contenedor todos los controles visuales alineados al vértice superior izquierdo, centrado, vértice inferior derecho etc. (tiene nueve posiciones posibles).
+Si disponemos dos o más controles los mismos se apilan.
+
+Por ejemplo si disponemos dentro de un FrameLayout un ImageView y un Button luego el botón se superpone a la imagen.
+
+Una actividad posible del control FrameLayout es disponer una serie de controles visuales no visibles e ir alternando cual se hace visible.
+
+Problema:
+Disponer un ImageView y un Button dentro de un layout FrameLayout. Cuando se inicia la aplicación mostrar solo el botón y al ser presionado ocultar el botón y hacer visible la imagen que muestra el ImageView.
+
+- Crear un nuevo proyecto de Android Studio con una actividad vacía.
+- Agregar un ImageView y un Button.
+
+```sh
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/usernameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:hint="Nombre de usuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/verifyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="180dp"
+        android:text="Verificar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+```
+![Layout](https://user-images.githubusercontent.com/75056800/220793762-b1f2e8a3-008d-4d8c-a6af-55190d8c36f7.png)
+
+## MainActivity
+
+Agregamos un Listener al botón para detectar cuándo se presiona. En el Listener, se pueden obtener los valores de los campos de texto y verificar si se ingresó texto
+```sh
+package com.tutorialesprogramacionya.proyecto022
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val imageView=findViewById<ImageView>(R.id.imageView)
+        val button=findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+            button.visibility = View.INVISIBLE
+            imageView.visibility = View.VISIBLE;
+        }
+    }
+}
+```
+
+
+
+![Notify](![image](https://user-images.githubusercontent.com/74626067/220903213-44eca4bd-bb43-4458-b956-66d6254d76b1.png))
+
 
 - Ejercicio 25
 
