@@ -5,6 +5,7 @@
 - Eduardo Farinango
 - Mateo Cueva
 - Kevin Pulupa
+- Daniel Flores
 
 
 ### Implementar los ejercicios del 3 al 46 de acuerdo a las instrucciones brindadas. 
@@ -205,6 +206,165 @@ class MainActivity : AppCompatActivity() {
 
 # Ejercicio 15
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+# Almacenamiento de datos en un archivo de texto localizado en una tarjeta SD
+
+En el concepto anterior vimos como crear y leer un archivo de texto en la memoria interna del equipo Android. En algunas situaciones podría ser útil almacenar los datos en una tarjeta SD (tener en cuenta que no todos los dispositivos Android cuentan con esta característica), esto debido a su mayor capacidad o la facilidad de compartir los archivos con otras personas entregando la tarjeta SD.
+
+Problema:
+Confeccionar un programa que permita ingresar el nombre de un archivo y el contenido. Permitir grabar los datos ingresados al presionar un botón. Disponer un segundo botón que permita recuperar los datos del archivo de texto.
+Hacer que los archivos se graben en una tarjeta SD.
+
+Crear un proyecto en Android Studio y definir como nombre: Ejercicio15
+
+![image](https://user-images.githubusercontent.com/27780513/221075418-be36de23-813c-4273-99e5-fd2a488c5498.png)
+
+Dentro del archivo activity_main.xml configuramos la interfaz, donde agregamos 2 botones (btnGuardar, btnBuscar), agregamos un txtView(txtContenido), un Plain Text(txtNomre).(Todos los elementos deben estar enlazados con los coordenas, de lo contrario nos lanzarán errores)
+
+![image](https://user-images.githubusercontent.com/27780513/221076147-810af427-a114-4442-8cdd-e921cfa0b23a.png)
+
+![image](https://user-images.githubusercontent.com/27780513/221076672-b5304ef4-b163-45f2-8413-a816276302b5.png)
+
+# Codigo activity_main.xml
+
+```sh
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="@string/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnBuscar"
+        android:layout_width="88dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="104dp"
+        android:contentDescription="@string/button"
+        android:onClick="buscar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_search"
+        tools:ignore="RedundantDescriptionCheck,DuplicateSpeakableTextCheck" />
+
+    <ImageButton
+        android:id="@+id/btnGuardar"
+        android:layout_width="82dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="104dp"
+        android:contentDescription="@string/button"
+        android:onClick="guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toEndOf="@+id/btnBuscar"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        tools:ignore="ImageContrastCheck,RedundantDescriptionCheck" />
+
+    <TextView
+        android:id="@+id/txtContenido"
+        android:layout_width="278dp"
+        android:layout_height="263dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+# MainActivity.kt
+
+```sh
+package com.example.holamundo
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.os.Environment
+import android.view.View
+//import android.widget.EditText
+import java.io.*
+import android.widget.*
+import android.app.Activity
+
+class MainActivity : AppCompatActivity() {
+    var txtNombre: EditText? = null
+    var txtContenido: EditText? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        txtNombre = findViewById(R.id.txtNombre)
+        this.txtContenido = findViewById(R.id.txtContenido)
+
+    }
+
+    fun guardar(view: View) {
+        val nombre = txtNombre?.text.toString()
+        val contenido = txtContenido?.text.toString()
+        try {
+            val sd = Environment.getExternalStorageDirectory()
+            val rutaArchivo = File(sd.path.toString(), nombre)
+            val archivo = OutputStreamWriter(openFileOutput(nombre, Activity.MODE_PRIVATE))
+            archivo.write(contenido)
+            archivo.flush()
+            archivo.close()
+            Toast.makeText(this, "El archivo se guardo exitosamente", Toast.LENGTH_LONG).show()
+            txtNombre?.setText("")
+            txtContenido?.setText("")
+        } catch (e: IOException) {
+            Toast.makeText(this, "Hubo un error al guardar " + e, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun buscar(view: View){
+        val nombre=txtNombre?.text.toString()
+        var contenido=""
+        try {
+            val sd=Environment.getExternalStorageDirectory()
+            val rutaArchivo= File(sd.path.toString(),nombre)
+            val archivo=InputStreamReader(openFileInput(nombre))
+            val bf=BufferedReader(archivo)
+            var linea=bf.readLine()
+            while (linea!=null){
+                contenido=contenido+linea+"\n"
+                linea=bf?.readLine()
+            }
+
+            archivo.close()
+            bf.close()
+            txtContenido?.setText(contenido)
+        }catch (e:IOException){
+            Toast.makeText(this,"Hubo un error al guardar "+e,Toast.LENGTH_LONG).show()
+        }
+
+    }
+}
+
+```
+Para trabajar con la memoria externa necesitamos pedirle permisos al usuario, para ellos nos dirigimos al archivo AndroidManifest.xml. Con esto manipulamos su memoria externa. 
+Agregamos la siguiente línea.
+![image](https://user-images.githubusercontent.com/27780513/221079134-f9b4a4fc-15c3-4de9-b768-03fa9a44e74e.png)
+
+# 20 - Layout (FrameLayout)
 
 El control de tipo FrameLayout dispone dentro del contenedor todos los controles visuales alineados al vértice superior izquierdo, centrado, vértice inferior derecho etc. (tiene nueve posiciones posibles).
 Si disponemos dos o más controles los mismos se apilan.
